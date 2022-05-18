@@ -1,2 +1,4 @@
 # fine-tune-model
-fine-tune主要针对Bert类型的模型，主要是为了封装常用的fine-tune操作，在训练完模型后，快速进行验证。
+封装常用的fine-tune操作，在训练完模型后，实现快速验证。目前主要针对Bert类型的模型进行fine-tune，仅支持Pytorch。
+
+
