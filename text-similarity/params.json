@@ -1,0 +1,18 @@
+{
+    "hidden_size": 768,
+    "learning_rate":5e-6,
+    "epoch":2,
+    "gradient_acc":8,
+    "batch_size":4,
+    "max_len":512,
+    "weight_decay":1e-4,
+    "warmup_rate":0.1,
+    "model_type": "xmlroberta",
+    "pooler_type": "cls",
+    "unsupervised": true,
+    "evalution_task": "similarity",
+    "cl_temperature": 0.05,
+    "data_dir":"data/",
+    "model_path":"hfl/cino-base-v2", 
+    "model_save_dir":"result/my-cino/"
+}

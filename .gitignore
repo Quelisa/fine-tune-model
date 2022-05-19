@@ -1,0 +1,4 @@
+*/data/*.txt
+*/result/*
+*/__pycache__/
+*.bk
