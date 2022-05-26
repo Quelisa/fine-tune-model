@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append("..")
 from utils.params import FT_Configer
 import torch
@@ -108,17 +109,18 @@ class Trainer():
         with torch.no_grad():
             for step, (inputs_ids, attention_mask,
                        labels) in tqdm(enumerate(data_loader)):
-                ids, att, label = inputs_ids.to(self.device), attention_mask.to(
-                    self.device), labels.to(self.device)
+                ids, att, label = inputs_ids.to(
+                    self.device), attention_mask.to(self.device), labels.to(
+                        self.device)
                 outputs = model(ids, att)
                 cos_sim = self.sim(outputs.unsqueeze(1), outputs.unsqueeze(0))
-                top1_acc.append(self.accuracy(cos_sim, labels))
+                top1_acc.append(self.accuracy(cos_sim, label))
         return np.sum(top1_acc) / len(top1_acc)
 
     def train(self, model, train_loader, dev_loader, index_loader, optimizer,
               schedule):
         best_top1_acc = 0.0
-        
+
         model.train()
         model.to(self.device)
         for i in range(self.params.epoch):
@@ -164,12 +166,14 @@ class Trainer():
                 retrieve.build_index(index_loader)
                 logger.info("begin to evalute dev for retrieve:")
                 top1_acc = retrieve.evalute(dev_loader)
-                logger.info("dev for retrieve top1_acc: {:.2f}".format(top1_acc))
+                logger.info(
+                    "dev for retrieve top1_acc: {:.2f}".format(top1_acc))
 
             elif self.params.evalution_task == 'similarity':
                 logger.info("begin to evalute dev for similarity:")
                 top1_acc = self.evalute(model, dev_loader)
-                logger.info("dev for similarity top1_acc: {:.2f}".format(top1_acc))
+                logger.info(
+                    "dev for similarity top1_acc: {:.2f}".format(top1_acc))
 
             if top1_acc > best_top1_acc:
                 best_top1_acc = top1_acc

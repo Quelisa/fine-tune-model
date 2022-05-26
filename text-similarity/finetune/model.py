@@ -103,7 +103,6 @@ def ts_forward(
     )
 
     batch_size = input_ids.size(0)
-    num_sent = input_ids.size(1)
     pooler_output = cls.pooler(attention_mask, outputs)
 
     if cls.pooler_type == "cls":
